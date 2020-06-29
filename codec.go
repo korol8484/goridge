@@ -73,6 +73,15 @@ func (c *Codec) ReadRequestBody(out interface{}) error {
 		return errors.New("{rawData} request for " + reflect.ValueOf(out).String())
 	}
 
+	if p.HasFlag(PayloadProto) {
+		value, ok := out.(ProtoInterface)
+		if !ok {
+			return errors.New(reflect.ValueOf(out).String() + " not implement `ProtoInterface`")
+		}
+
+		return value.ProtoUnmarshal(data, out)
+	}
+
 	return json.Unmarshal(data, out)
 }
 

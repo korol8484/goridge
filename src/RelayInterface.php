@@ -22,6 +22,7 @@ interface RelayInterface
     public const PAYLOAD_RAW     = 4;
     public const PAYLOAD_ERROR   = 8;
     public const PAYLOAD_CONTROL = 16;
+    public const PAYLOAD_PROTO   = 32;
 
     /**
      * Send payload message to another party.
