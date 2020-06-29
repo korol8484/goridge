@@ -17,6 +17,9 @@ const (
 
 	// PayloadControl defines that associated data must be treated as control data.
 	PayloadControl byte = 16
+
+	// PayloadProto must be set when data Protocol Buffer
+	PayloadProto byte = 32
 )
 
 // Prefix is always 17 bytes long and contain meta flags and length of next data package. Receive prefix by converting it
