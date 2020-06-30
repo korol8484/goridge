@@ -79,7 +79,7 @@ func (c *Codec) ReadRequestBody(out interface{}) error {
 			return errors.New(reflect.ValueOf(out).String() + " not implement `ProtoInterface`")
 		}
 
-		return value.ProtoUnmarshal(data, out)
+		return value.ProtoUnmarshal(data)
 	}
 
 	return json.Unmarshal(data, out)
