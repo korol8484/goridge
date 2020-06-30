@@ -48,7 +48,7 @@ class RPC
             $this->relay->send($header, Relay::PAYLOAD_CONTROL | Relay::PAYLOAD_RAW);
         }
 
-        if ($flags & Relay::PAYLOAD_RAW && is_scalar($payload)) {
+        if (($flags & Relay::PAYLOAD_RAW || $flags & Relay::PAYLOAD_PROTO) && is_scalar($payload)) {
             if (!$this->relay instanceof SendPackageRelayInterface) {
                 $this->relay->send((string)$payload, $flags);
             } else {

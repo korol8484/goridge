@@ -1,5 +1,5 @@
 package goridge
 
 type ProtoInterface interface {
-	ProtoUnmarshal(data []byte, v interface{}) (err error)
+	ProtoUnmarshal(data []byte) (err error)
 }
