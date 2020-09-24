@@ -264,7 +264,7 @@ class SocketRelay implements RelayInterface, SendPackageRelayInterface, Stringab
         }
 
         try {
-            if (socket_connect($socket, $this->address, $this->port ?? 0) === false) {
+            if (@socket_connect($socket, $this->address, $this->port ?? 0) === false) {
                 throw new Exceptions\RelayException(socket_strerror(socket_last_error($socket)));
             }
         } catch (Exception $e) {
