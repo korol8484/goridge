@@ -22,7 +22,7 @@ use Exception;
  * prefix:
  * [ flag       ][ message length, unsigned int 64bits, LittleEndian ]
  */
-class SocketRelay implements RelayInterface, SendPackageRelayInterface, StringableRelayInterface
+class SocketRelay implements RelayInterface, SendPackageRelayInterface, StringableRelayInterface, RelayClose
 {
     /** Supported socket types. */
     public const SOCK_TCP  = 0;

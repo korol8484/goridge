@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Spiral\Goridge;
 
 use Spiral\Goridge\RelayInterface as Relay;
+use Throwable;
 
 /**
  * RPC bridge to Golang net/rpc package over Goridge protocol.
@@ -33,13 +34,14 @@ class RPC
 
     /**
      * @param string $method
-     * @param mixed  $payload An binary data or array of arguments for complex types.
-     * @param int    $flags   Payload control flags.
+     * @param mixed $payload An binary data or array of arguments for complex types.
+     * @param int $flags Payload control flags.
      *
      * @return mixed
      *
      * @throws Exceptions\RelayException
      * @throws Exceptions\ServiceException
+     * @throws Throwable
      */
     public function call(string $method, $payload, int $flags = 0)
     {
@@ -103,6 +105,10 @@ class RPC
 
         // wait for the response
         $body = (string)$this->relay->receiveSync($flags);
+
+        if ($this->relay instanceof RelayClose) {
+            $this->relay->close();
+        }
 
         return $this->handleBody($body, $flags);
     }
